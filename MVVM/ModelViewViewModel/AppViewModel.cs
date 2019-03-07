@@ -1,4 +1,5 @@
-﻿using ModelViewViewModel.Models;
+﻿using ModelViewViewModel.Commands;
+using ModelViewViewModel.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,6 +24,39 @@ namespace ModelViewViewModel
             {
                 selectedPhone = value;
                 OnPropertyChanged(nameof(SelectedPhone));
+            }
+        }
+
+        private RelayCommand addComm;
+        public RelayCommand AddComm
+        {
+            get
+            {
+                return addComm ?? (addComm = new RelayCommand(obj =>
+                {
+                    Phone phone = new Phone();
+                    Phones.Insert(0, phone);
+                    SelectedPhone = phone;
+                }
+                ));
+            }
+        }
+
+        private RelayCommand removeComm;
+        public RelayCommand RemoveComm
+        {
+            get
+            {
+                return removeComm ?? (removeComm = new RelayCommand(obj =>
+                {
+                    Phone phone = obj as Phone;
+                    if (phone != null)
+                    {
+                        Phones.Remove(phone);
+                    }
+                },
+                (obj) => Phones.Count > 0
+                ));
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelViewViewModel.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,10 @@ namespace ModelViewViewModel
         {
             InitializeComponent();
 
-            this.DataContext = new AppViewModel(); 
+            this.DataContext = new AppViewModel();
+
+            //var cmd = new RelayCommand(o => { MessageBox.Show(o.ToString()); });
+            //cmd.Execute("Hi!");
         }
     }
 }
